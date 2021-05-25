@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="app.js"></script>
         <link rel="stylesheet" href="style.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
     </head>
     <body>
         <header>PROJECT: LIBRARY</header>
@@ -11,6 +11,7 @@
                 <div class="list-header">
                     <button id="addBook">+ Add New Book</button>
                 </div>
+                <!-- Books table -->
                 <div class="list-items">
                     <table id="bookList">
                         <!-- <tr>
@@ -22,6 +23,22 @@
                     </table>
                 </div>
             </div>
+            <!-- Delete popup -->
+            <div class="modal modal-delete">
+                <div class="modal-box-delete">
+                    <div class="modal-header">HEADS UP!</div>
+                    <div class="modal-message">Are you sure you want to delete the selected entry?</div>
+                    <div class="modal-buttons">
+                        <button id="delete" class="popup-button">YES, DELETE</button>
+                        <button class="cancel popup-button">CANCEL</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Input form popup -->
+            <div class="modal modal-input">
+
+            </div>
         </main>
     </body>
+    <script src="app.js"></script>
 </html>
