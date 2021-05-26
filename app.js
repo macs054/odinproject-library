@@ -50,8 +50,12 @@ const displayTableItems = () => {
             }
         }
         // Edit and Delete icons
-        row.insertCell().innerHTML = `<span class="material-icons-outlined" title="Edit">edit_note</span>
+        row.insertCell().innerHTML = `<span class="material-icons-outlined" title="Edit" id=edit-${index}>edit_note</span>
                                         <span class="material-icons-outlined" id=del-${index} title="Delete">delete</span>`;
+        document.getElementById("edit-" + index).addEventListener('click', () => {
+            openInputWindow(index);
+            bookIndex = index;
+        });
         document.getElementById("del-" + index).addEventListener('click', () => {
             openDeleteWindow(book);
             bookIndex = index;
@@ -85,14 +89,40 @@ const removeBook = index => {
     refreshTable();
 }
 
+const editBook = (index, title, author, pages, read) => {
+    myLibrary[index].title = title;
+    myLibrary[index].author = author;
+    myLibrary[index].pages = pages;
+    myLibrary[index].read = read;
+}
+
 const openDeleteWindow = book => {
-    document.querySelector(".modal-delete").style.display = "block";
+    document.querySelector(".modal").style.display = "block";
+    document.querySelector(".modal-box-delete").style.display = "flex";
+    document.querySelector(".modal-box-input").style.display = "none";
     document.querySelector(".modal-message").textContent = `Are you sure you want to delete '${book.title}'?`;
+}
+
+const openInputWindow = (book = "") => {
+    document.querySelector(".modal").style.display = "block";
+    document.querySelector(".modal-box-input").style.display = "flex";
+    document.querySelector(".modal-box-delete").style.display = "none";
+
+    if(book !== "") {
+        document.getElementById("title").value = myLibrary[book].title;
+        document.getElementById("author").value = myLibrary[book].author;
+        document.getElementById("pages").value = myLibrary[book].pages;
+        document.getElementById("read").checked = myLibrary[book].read;
+    }
 }
 
 const closeModalWindow = () => {
     modal.style.display = "none";
     bookIndex = "";
+    document.getElementById("title").value = "";
+    document.getElementById("author").value = "";
+    document.getElementById("pages").value = "";
+    document.getElementById("read").checked = false;
 }
 
 // WINDOW
@@ -102,8 +132,28 @@ onload = () => {
 
     // Add New button
     document.getElementById("addBook").addEventListener("click", () => {
-        addBookToLibrary("Title", "Author", 10, false); 
-        refreshTable();
+        // addBookToLibrary("Title", "Author", 10, false); 
+        // refreshTable();
+        openInputWindow();
+    });
+
+    // Submit button
+    document.getElementById("submit").addEventListener("click", () => {
+        let title = document.getElementById("title").value;
+        let author = document.getElementById("author").value;
+        let pages = document.getElementById("pages").value;
+        let read = document.getElementById("read").checked;
+
+        if(title != "" && author != "" && pages != "") {
+            // if(bookIndex !== "") {
+            //     editBook(bookIndex, title, author, pages, read)
+            // } else {
+            //     addBookToLibrary(title, author, pages, read)
+            // }
+            (bookIndex !== "") ? editBook(bookIndex, title, author, pages, read) : addBookToLibrary(title, author, pages, read)
+            refreshTable();
+            closeModalWindow();
+        } 
     });
 
     // Delete button
@@ -113,8 +163,8 @@ onload = () => {
     });  
 
     // Cancel button
-    document.querySelector(".cancel").addEventListener("click", () => {
-        closeModalWindow();
+    document.querySelectorAll(".cancel").forEach(button => {
+        button.addEventListener("click", () => closeModalWindow());
     }); 
 }
 
@@ -123,9 +173,4 @@ onclick = event => {
        closeModalWindow();
    }
 }
-
-// TODO
-
-// 2. Input form
-// 3. Edit function
 

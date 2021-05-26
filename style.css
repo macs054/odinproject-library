@@ -75,7 +75,7 @@ header {
 
 /* Modal Background */
 .modal {
-    display: none; 
+    display: none;
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
     padding-top: 100px; /* Location of the box */
@@ -88,13 +88,14 @@ header {
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
-.modal-box-delete {
+.modal-box-delete, 
+.modal-box-input {
     background-color: #fefefe;
     margin: auto;
     padding: 40px;
     border: 1px solid #888;
     width: 520px;
-    display: flex;
+    display: none;
     flex-flow: column wrap;
     justify-content: space-around;
     align-items: center;
@@ -116,6 +117,55 @@ header {
     flex-flow: row wrap;   
 }
 
+.modal-input {
+    display: inline-flex;
+    flex-flow: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+.flex-outer {
+    list-style-type: none;
+    max-width: 600px;
+    padding-right: 20px;
+    padding-top: 20px;
+}
+
+.flex-outer li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.flex-outer > li > label {
+    flex: 1 0 120px;
+    max-width: 220px;
+    margin-bottom: 5px;
+    font-size: 18px;
+}
+
+.flex-outer > li > input[type="text"],
+.flex-outer > li > input[type="number"] {
+    flex: 1 0 220px;
+    font-size: 18px;
+}
+
+.flex-outer > li > input[type="checkbox"] {
+    height: 18px;
+    width: 18px;   
+}
+
+.flex-outer > li:last-child > label{
+    flex: 0 0 50px;
+    margin-bottom: 0;
+}
+
+.flex-outer > li:not(:last-child) {
+    margin-bottom: 20px;
+}
+
 .popup-button {
     display: inline-flex;
     justify-content: center;
@@ -127,6 +177,9 @@ header {
     vertical-align: middle;
     font-size: 12px;
     cursor: pointer;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
 }
 
 #delete {
@@ -140,14 +193,9 @@ header {
     color: white;
 }
 
-.cancel {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-}
-
 .cancel:hover {
     opacity: 0.9;
 }
+
 
 
