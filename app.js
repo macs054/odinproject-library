@@ -132,8 +132,6 @@ onload = () => {
 
     // Add New button
     document.getElementById("addBook").addEventListener("click", () => {
-        // addBookToLibrary("Title", "Author", 10, false); 
-        // refreshTable();
         openInputWindow();
     });
 
@@ -145,11 +143,6 @@ onload = () => {
         let read = document.getElementById("read").checked;
 
         if(title != "" && author != "" && pages != "") {
-            // if(bookIndex !== "") {
-            //     editBook(bookIndex, title, author, pages, read)
-            // } else {
-            //     addBookToLibrary(title, author, pages, read)
-            // }
             (bookIndex !== "") ? editBook(bookIndex, title, author, pages, read) : addBookToLibrary(title, author, pages, read)
             refreshTable();
             closeModalWindow();
